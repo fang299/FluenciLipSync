@@ -66,8 +66,10 @@ class Predictor(BasePredictor):
 
     def predict(
         self,
-        face: Path = Input(description="video/image that contains faces to use"),
-        audio: Path = Input(description="video/audio file to use as raw audio source"),
+        face: Path = Input(
+            description="video/image that contains faces to use"),
+        audio: Path = Input(
+            description="video/audio file to use as raw audio source"),
         pads: str = Input(
             description="Padding for the detected face bounding box.\n"
             "Please adjust to include chin at least\n"
@@ -93,7 +95,7 @@ class Predictor(BasePredictor):
             pass
 
         face_ext = os.path.splitext(face)[-1]
-        if face_ext not in [".mp4", ".mov", ".png" , ".jpg" , ".jpeg" , ".gif", ".mkv", ".webp"]:
+        if face_ext not in [".mp4", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".mkv", ".webp"]:
             raise ValueError(f'Unsupported face format {face_ext!r}')
 
         audio_ext = os.path.splitext(audio)[-1]
@@ -132,6 +134,10 @@ class Predictor(BasePredictor):
                 "-max_interleave_delta", "100M",
                 "-map", "0:v:0",
                 "-map", "1:a:0",
+                '-c:v', 'libx264',
+                '-crf', '18',
+                '-vf', 'format=yuv420p',
+                '-movflags', 'faststart+frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov',
                 # "-c", "copy",
                 # "-c:v", "h264_nvenc",
                 "results/result_voice.mp4",
