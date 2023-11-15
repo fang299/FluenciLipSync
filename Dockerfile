@@ -1,3 +1,4 @@
+RUN pip3 install --upgrade pip
 FROM nvidia/cuda:11.6.2-cudnn8-devel-ubuntu20.04
 
 ARG DEBIAN_FRONTEND=noninteractive

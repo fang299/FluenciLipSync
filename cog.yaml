@@ -1,7 +1,7 @@
 # Configuration for Cog ⚙️
 # Reference: https://github.com/replicate/cog/blob/main/docs/yaml.md
 
-image: r8.im/devxpy/cog-wav2lip
+image: r8.im/fang299/fluenci-lip-sync
 
 build:
   # set to true if your model requires a GPU
@@ -10,8 +10,8 @@ build:
 
   # a list of ubuntu apt packages to install
   system_packages:
-     - ffmpeg
-     - cmake
+    - ffmpeg
+    - cmake
 
   # python version in the form '3.8' or '3.8.12'
   python_version: "3.8"
