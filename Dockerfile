@@ -1,7 +1,7 @@
-RUN pip3 install --upgrade pip
 FROM nvidia/cuda:11.6.2-cudnn8-devel-ubuntu20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+
 
 # install python via pyenv
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1 \
 	&& rm -rf /var/lib/apt/lists/*
 ENV PATH="/root/.pyenv/shims:/root/.pyenv/bin:$PATH"
-ARG PYTHON_VERSION=3.8
+ARG PYTHON_VERSION=3.10.9
 RUN curl -s -S -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash && \
 	pyenv install $PYTHON_VERSION && \
 	pyenv global $PYTHON_VERSION

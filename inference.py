@@ -282,7 +282,12 @@ def main():
         # "-vsync", "0", "-hwaccel", "cuda", "-hwaccel_output_format", "cuda",
         "-i", "temp/result.avi",
         "-i", args.audio,
-        # "-c:v", "h264_nvenc",
+        '-map', '0:v',            # Map video stream from first input
+        '-map', '1:a',            # Map audio stream from second input
+        '-c:v', 'libx264',        # Video codec
+        '-crf', '18',             # Constant Rate Factor for quality
+        '-vf', 'format=yuv420p',  # Video filter for pixel format
+        '-movflags', 'faststart+frag_keyframe+separate_moof+omit_tfhd_offset+empty_moov',  # MOV flags
         args.outfile,
     ])
 
